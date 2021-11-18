@@ -28,4 +28,4 @@ browser executes the event handler
 that renders notes to display
 end note
 ```
-![sequence web diagram](./new_node/img/new_node.png)
+![sequence web diagram](./new_note/img/new_note.png)
