@@ -1,20 +1,16 @@
-.App {
-  text-align: center;
+div {
+
 }
-.Date {
-  display: flex;
-  background-color: #282c34;
-  color: #806F49;
-  font-size: calc(3vmin);
-}
+
 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+  min-width: 100vm;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 3vmin);
+  align-items: start;
+  padding-left: calc(10px + 3vmin);
+  font-size: calc(10px + 2vmin);
   color: #806F49;
 }
