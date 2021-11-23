@@ -10,9 +10,10 @@ import React from 'react';
 
 
 function Part(props) {
+  console.log(props)
   return(
     <p>
-      {props.part} {props.exercise}
+      {props.part.part} {props.part.exercises}
     </p>
   )
 }
@@ -22,8 +23,8 @@ function Content(props) {
   return (
     <>
       {
-        props.contents.map((item) => (
-          <Part part={item.part} exercise={item.exercises}/>
+        props.course.parts.map((item) => (
+          <Part part={item} />
         ))
       }
     </>
@@ -32,35 +33,37 @@ function Content(props) {
 
 const Total = (props) => {
   return(
-    <p> {props.message} {props.contents.reduce((result,item) => (item.exercises + result),0)} </p>
+    <p> {props.course.msg} {props.course.parts.reduce((result,item) => (item.exercises + result),0)} </p>
   )
 }
 
-const Header  = (props) => <h1>{props.course}</h1>
+const Header  = (props) => <h1>{props.course.name}</h1>
 
 const App = () => {
-  const course = 'Half Stack application development'  
-  let msg    = 'Number of exercises'
-  let contents = [
-    {
-      part      : 'Fundamentals of React',
-      exercises : 10
-    },
-    {
-      part      : 'Using props to pass data',
-      exercises : 7
-    },
-    {
-      part      : 'State of a component',
-      exercises : 14
-    }
-  ];
+  const course = {
+    name  : 'Half Stack application development', 
+    msg   : 'Number of exercises',
+    parts : [
+      {
+        part      : 'Fundamentals of React',
+        exercises : 10
+      },
+      {
+        part      : 'Using props to pass data',
+        exercises : 7
+      },
+      {
+        part      : 'State of a component',
+        exercises : 14
+      }
+    ]
+  };
 
   return (
     <div className="App-header">
-      < Header course={course} />
-      < Content contents={contents}/>
-      < Total message={msg} contents={contents} />
+      < Header  course={course} />
+      < Content course={course} />
+      < Total   course={course} />
     </div>
   )
 }
