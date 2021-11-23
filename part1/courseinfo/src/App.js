@@ -23,7 +23,7 @@ function Content(props) {
 
 function Total(props) {
   return(
-    <p> Number of exercises {props.contents.reduce((res,item) =>(item.exercises + res),0)} </p>
+    <p> {props.message} {props.contents.reduce((result,item) => (item.exercises + result),0)} </p>
   )
 }
 
@@ -31,6 +31,7 @@ const Header  = (props) => <h1>{props.course}</h1>
 
 const App = () => {
   const course = 'Half Stack application development'  
+  const msg    = 'Number of exercises'
   let contents = [
     {
       part      : 'Fundamentals of React',
@@ -50,7 +51,7 @@ const App = () => {
     <div className="App-header">
       < Header course={course} />
       < Content contents={contents}/>
-      < Total contents={contents} />
+      < Total message={msg} contents={contents} />
     </div>
   )
 }
