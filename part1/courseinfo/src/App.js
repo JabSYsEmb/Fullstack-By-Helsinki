@@ -1,5 +1,13 @@
+/*
+* this difference between arrow function and normal function declaration
+* https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/
+* map(), foreach(), reduce() and filter() function
+* https://medium.com/poka-techblog/simplify-your-javascript-use-map-reduce-and-filter-bd02c593cc2d
+*/
+
 import React from 'react';
 //  import './App.css';
+
 
 function Part(props) {
   return(
@@ -8,6 +16,7 @@ function Part(props) {
     </p>
   )
 }
+
 
 function Content(props) {
   return (
@@ -21,7 +30,7 @@ function Content(props) {
   )
 }
 
-function Total(props) {
+const Total = (props) => {
   return(
     <p> {props.message} {props.contents.reduce((result,item) => (item.exercises + result),0)} </p>
   )
@@ -31,7 +40,7 @@ const Header  = (props) => <h1>{props.course}</h1>
 
 const App = () => {
   const course = 'Half Stack application development'  
-  const msg    = 'Number of exercises'
+  let msg    = 'Number of exercises'
   let contents = [
     {
       part      : 'Fundamentals of React',
