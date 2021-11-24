@@ -1,16 +1,7 @@
-div {
 
+h2{
+  color: red;
+  text-align: center;
+  font-size: calc(5px + 5vmax);
 }
 
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  min-width: 100vm;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding-left: calc(10px + 3vmin);
-  font-size: calc(10px + 2vmin);
-  color: #806F49;
-}
