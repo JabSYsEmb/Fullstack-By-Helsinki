@@ -9,33 +9,13 @@ import React from 'react';
 //  import './App.css';
 
 
-function Part(props) {
-  console.log(props)
-  return(
-    <p>
-      {props.part.part} {props.part.exercises}
-    </p>
-  )
-}
+const Part = (props) => <p> {props.part.part} {props.part.exercises} </p>
 
 
-function Content(props) {
-  return (
-    <>
-      {
-        props.course.parts.map((item) => (
-          <Part part={item} />
-        ))
-      }
-    </>
-  )
-}
+const Content = (props) => <p> {props.course.parts.map((item) => (<Part part={item} />))} </p>
 
-const Total = (props) => {
-  return(
-    <p> {props.course.msg} {props.course.parts.reduce((result,item) => (item.exercises + result),0)} </p>
-  )
-}
+const Total = (props) => <p> {props.course.msg} {props.course.parts.reduce((result,item) => (item.exercises + result),0)} </p>
+
 
 const Header  = (props) => <h1>{props.course.name}</h1>
 
