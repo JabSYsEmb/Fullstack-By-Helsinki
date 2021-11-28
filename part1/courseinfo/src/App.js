@@ -18,10 +18,12 @@ const Total = (props) => <p> {props.course.msg} {props.course.parts.reduce((resu
 const Header  = (props) => <h1>{props.course.name}</h1>
 
 const Counter = ({course}) => {
-
   return(
   <>
-    <h2>{course.counter.msg}  {course.counter.counter} </h2>
+    <h2>{course.counter.msg}  {course.counter.counterState} </h2>
+    <button onClick={course.counter.increaseByOne}>plus</button>
+    <button onClick={course.counter.setToZero}>zero</button>
+    <button onClick={course.counter.decreaseByOne}>sub</button>
   </>)
 }
 
@@ -45,14 +47,14 @@ const App = () => {
       }
     ],
     counter   : {
-      counter : useState(0),
-      msg     : "items :"
+      counterState  : useState(0), //[]
+      setToZero     : () => course.counter.counterState[1](0),
+      increaseByOne : () => course.counter.counterState[1](course.counter.counterState[0] + 1),
+      decreaseByOne : () => course.counter.counterState[1](course.counter.counterState[0] - 1),
+      msg           : "items :"
     }
   }
   
-  setTimeout(() => course.counter.counter[1](course.counter.counter[0] + 1),500)
-
-  console.log('rendering...', course.counter.counter)
   return (
     <div className="App-header">
       < Header  course={course} />
