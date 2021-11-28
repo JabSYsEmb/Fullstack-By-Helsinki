@@ -5,7 +5,7 @@
 * https://medium.com/poka-techblog/simplify-your-javascript-use-map-reduce-and-filter-bd02c593cc2d
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 
@@ -17,9 +17,16 @@ const Total = (props) => <p> {props.course.msg} {props.course.parts.reduce((resu
 
 const Header  = (props) => <h1>{props.course.name}</h1>
 
-const Counter = (props) => <h2> counter : {props.counter}</h2>
+const Counter = ({course}) => {
 
-const App = (props) => {
+  return(
+  <>
+    <h2>{course.counter.msg}  {course.counter.counter} </h2>
+  </>)
+}
+
+const App = () => {
+
   const course = {
     name  : 'Half Stack application development', 
     msg   : 'Number of exercises',
@@ -37,24 +44,24 @@ const App = (props) => {
         exercises : 14
       }
     ],
-    refresh_num   : 0
-  };
+    counter   : {
+      counter : useState(0),
+      msg     : "items :"
+    }
+  }
   
+  setTimeout(() => course.counter.counter[1](course.counter.counter[0] + 1),500)
+
+  console.log('rendering...', course.counter.counter)
   return (
     <div className="App-header">
-      < Counter counter={props.counter} />
       < Header  course={course} />
       < Content course={course} />
       < Total   course={course} />
+      < Counter course={course} />
     </div>
   )
 }
 
-const increse_refresh_num = () => {this.course.refresh_num+=1}
 
-const exporter ={
-  App,
-  increse_refresh_num
-}
-
-export default exporter;
+export default App;

@@ -1,20 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import exporter from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const App = exporter.App;
-
-let counter=1;
-
-const refresh = () => ReactDOM.render(
-  <App counter={counter}/>,
+ReactDOM.render(
+  <App/>,
   document.getElementById('root'),
-);
-counter += 3
-refresh()
-counter += 1
-refresh()
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
