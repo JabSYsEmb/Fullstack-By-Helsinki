@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import './App.css';
 
+const Statistics  = ({data})    =>  Object.entries(data)
+                                        .map(item => < StatisticsLine value={item[1]} msg={item[0]} className={item[0]} />)
+                                        
+const StatisticsLine  = ({value,msg,className})    => <p className={className}>{msg} : {value}</p>
+
 const Header          = ({header,className})       => <h1 className={className}>{header}</h1>
 const Button          = ({onClick,text,className}) => <button onClick={onClick} className={className}>{text}</button>
-const StatisticsLine  = ({value,msg,className})    => <p className={className}>{msg} : {value}</p>
 
 const sumOfFeedbacks  = (feedbacks)                => Object.entries(feedbacks).reduce((result,item) => (result+item[1]),0);
 const fixFloat        = (float_num,step)           => float_num.toFixed(step)
@@ -23,14 +27,16 @@ function App() {
   const feedback_header   = "Give feedback";
   const statistics_header = "Statistics";
   
-  const [feedbacks, updateFeedbacks] = useState({
+  const [data, updateFeedbacks] = useState({
     good    : 0,
     neutral : 0,
     bad     : 0
   });
-  const giveGood    = () => updateFeedbacks({...feedbacks, good    : feedbacks.good + 1   } )
-  const giveNeutral = () => updateFeedbacks({...feedbacks, neutral : feedbacks.neutral + 1} )
-  const giveBad     = () => updateFeedbacks({...feedbacks, bad     : feedbacks.bad + 1    } )
+  
+  const giveGood    = () => updateFeedbacks({...data, good    : data.good + 1   } )
+  const giveNeutral = () => updateFeedbacks({...data, neutral : data.neutral + 1} )
+  const giveBad     = () => updateFeedbacks({...data, bad     : data.bad + 1    } )
+
   // console.log(Object.entries(feedbacks).map(item => item[0]+ " : " +item[1]))
   return (
     <div className="App">
@@ -40,12 +46,10 @@ function App() {
         < Button onClick={giveNeutral} text="Neutral" className="neutral" />
         < Button onClick={giveBad}     text="Bad"     className="bad"     />
         < Header header={statistics_header} className="main-color" />
-        < StatisticsLine value={feedbacks.good}    msg="Good"    className="good"    />
-        < StatisticsLine value={feedbacks.neutral} msg="Neutral" className="neutral" />
-        < StatisticsLine value={feedbacks.bad}     msg="Bad"     className="bad"     />
-        < StatisticsLine value={sumOfFeedbacks(feedbacks)} msg="All" className="main-color" />
-        < StatisticsLine value={findAverageOfFeedbacks(feedbacks)} msg="Average" className="main-color" />
-        < StatisticsLine value={findPositiveRatioInFeedbacks(feedbacks)} msg="Postive" className="main-color" />
+        < Statistics data={data}/>
+        < StatisticsLine value={sumOfFeedbacks(data)} msg="All" className="main-color" />
+        < StatisticsLine value={findAverageOfFeedbacks(data)} msg="Average" className="main-color" />
+        < StatisticsLine value={findPositiveRatioInFeedbacks(data)} msg="Postive" className="main-color" />
       </header>
     </div>
   );
