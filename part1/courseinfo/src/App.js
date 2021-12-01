@@ -17,53 +17,122 @@ const Total = (props) => <p> {props.course.msg} {props.course.parts.reduce((resu
 
 const Header  = (props) => <h1>{props.course.name}</h1>
 
-const Counter = ({course}) => {
-  return(
-  <>
-    <h2>{course.counter.msg}  {course.counter.counterState} </h2>
-    <button onClick={course.counter.increaseByOne}>plus</button>
-    <button onClick={course.counter.setToZero}>zero</button>
-    <button onClick={course.counter.decreaseByOne}>sub</button>
-  </>)
-}
+const Counter = ({msg, counterState}) => <h2>{msg} {counterState}</h2>
 
-const App = () => {
+const Button = ({onClick, msg}) => <button onClick={onClick}>{msg}</button>
 
-  const course = {
-    name  : 'Half Stack application development', 
-    msg   : 'Number of exercises',
-    parts : [
-      {
-        part      : 'Fundamentals of React',
-        exercises : 11
-      },
-      {
-        part      : 'Using props to pass data',
-        exercises : 7
-      },
-      {
-        part      : 'State of a component',
-        exercises : 14
-      }
-    ],
-    counter   : {
-      counterState  : useState(0), //[]
-      setToZero     : () => course.counter.counterState[1](0),
-      increaseByOne : () => course.counter.counterState[1](course.counter.counterState[0] + 1),
-      decreaseByOne : () => course.counter.counterState[1](course.counter.counterState[0] - 1),
-      msg           : "items :"
-    }
+const History = ({allClicks}) => {
+  console.log(allClicks);
+  if(allClicks.length === 0) {
+    return (
+      <div> 
+        the app is used by pressing the buttons      
+      </div>
+    )
   }
-  
   return (
-    <div className="App-header">
-      < Header  course={course} />
-      < Content course={course} />
-      < Total   course={course} />
-      < Counter course={course} />
-    </div>
+  <div>
+    Pressed Buttons until now : {allClicks.join('-')}
+  </div>
   )
 }
 
+// const App = () => {
+//   // const course = {
+//   //   name  : 'Half Stack application development', 
+//   //   msg   : 'Number of exercises',
+//   //   parts : [
+//   //     {
+//   //       part      : 'Fundamentals of React',
+//   //       exercises : 11
+//   //     },
+//   //     {
+//   //       part      : 'Using props to pass data',
+//   //       exercises : 7
+//   //     },
+//   //     {
+//   //       part      : 'State of a component',
+//   //       exercises : 14
+//   //     }
+//   //   ],
+//   //   counter   : {
+//   //     counterState  : useState(0), //[]
+//   //     setToZero     : () => course.counter.counterState[1](0),
+//   //     increaseByOne : () => course.counter.counterState[1](course.counter.counterState[0]+ 1),
+//   //     decreaseByOne : () => course.counter.counterState[1](course.counter.counterState[0] - 1),
+//   //     msg           : "items :"
+//   //   }
+//   // }
+//   // const [clicks, setClicks]= useState({
+//   //   right: 0,
+//   //   left : 0
+//   // })
+//   // const setBothTozero      = () => setClicks({
+//   //   right: 0,
+//   //   left : 0
+//   // })
+//   // const increaseLeftByOne  = () => setClicks({
+//   //   ...clicks,
+//   //   left : clicks.left + 1
+//   // })
+//   // const increaseRightByOne = () => setClicks({
+//   //   ...clicks,
+//   //   right : clicks.right + 1
+//   // })
+  
+//   // return (
+//   //   <div className="App-header">
+//   //     < Counter msg={course.counter.msg} counterState={course.counter.counterState} />
+//   //     <div className="center">
+//   //       < Button onClick={course.counter.increaseByOne} msg="increaseByOne" />
+//   //       < Button onClick={course.counter.setToZero} msg="setToZero" />
+//   //       < Button onClick={course.counter.decreaseByOne} msg="decreaseByOne" />
+//   //     </div>
+//   //     < Counter msg="left-counter :" counterState={clicks.left} />
+//   //     < Counter msg="right-counter :" counterState={clicks.right} />
+//   //     <div className="center">
+//   //       < Button onClick={increaseLeftByOne} msg="increseLeftByOne" />
+//   //       < Button onClick={setBothTozero} msg="setBothTozero" />
+//   //       < Button onClick={increaseRightByOne} msg="increaseRightByOne" />
+//   //     </div>
+//   //   </div>
+//   // )
+
+//   const [left, setLeft] = useState(0)
+//   const [right, setRight] = useState(0)
+//   const [allClicks, setAll] = useState([])
+//   const handleLeftClick = () => {    setAll(allClicks.concat('L'));    setLeft(left + 1) }
+//   const handleRightClick = () => {    setAll(allClicks.concat('R'));   setRight(right + 1)  }
+  
+//   return (
+//     <div>
+//       {left}
+//       <Button onClick={handleLeftClick} msg="left" />
+//       <Button onClick={handleRightClick} msg="right" />
+//       {right}
+//       < History allClicks={allClicks} />   
+//     </div>
+//   )
+// }
+
+const App = () => {
+  const [value, setValue] = useState(10)
+
+  const hello = (who) => {    
+    const handler = () => {      
+      console.log('hello', who)    
+    };    
+    return handler  
+  }
+  
+  return (
+    <div>
+      {value}
+      <button onClick={hello('world')}>button</button>      
+      <button onClick={hello('react')}>button</button>      
+      <button onClick={hello('function')}>button</button>    
+    </div>
+  )
+}
 
 export default App;

@@ -8,3 +8,8 @@ h2 {
 button {
   font-size: calc(12px + 1vmin);
 }
+
+.center {
+  align-items: center;
+  text-align: center;
+}
