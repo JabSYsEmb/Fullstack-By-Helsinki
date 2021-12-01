@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 
-const Statistics  = ({data})    =>  Object.entries(data)
-                                        .map(item => < StatisticsLine value={item[1]} msg={item[0]} className={item[0]} />)
+const Statistics  = ({data})    =>  isSumZero(data) ? 
+                                    "No feedbacks given" : 
+                                    Object.entries(data)
+                                            .map((item,index) => < StatisticsLine value={item[1]} msg={item[0]} className={item[0]} />)
                                         
 const StatisticsLine  = ({value,msg,className})    => <p className={className}>{msg} : {value}</p>
 
