@@ -4,5 +4,5 @@
 
 [0.5: single page app diagram](./single_page_app/) : the solution regards to 0.5 exersize.
 
-[0.6: new note in spa style web](./new_note_sing_page_app/) : the solution regards to 0.6 exersize.
+[0.6: new note in spa style web](./new_note_single_page_app/) : the solution regards to 0.6 exersize.
 
