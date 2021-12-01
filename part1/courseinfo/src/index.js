@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import * as App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <App/>,
+  <App.App/>,
   document.getElementById('root'),
 )
 

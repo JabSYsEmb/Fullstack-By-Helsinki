@@ -134,5 +134,6 @@ const App = () => {
     </div>
   )
 }
+export {Part};
 
-export default App;
+export  {App};
