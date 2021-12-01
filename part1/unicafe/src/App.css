@@ -1,0 +1,20 @@
+button:hover{
+  cursor:          pointer;
+  background-color: gray;
+  color:            blue;
+}
+.main-color {
+  color: #0707AD;
+}
+
+.good {
+  color: green;
+}
+
+.neutral {
+  color: purple;
+}
+
+.bad {
+  color: red;
+}
