@@ -3,18 +3,6 @@ button:hover{
   background-color: gray;
   color:            blue;
 }
-.main-color {
+p,h1 {
   color: #0707AD;
-}
-
-.good {
-  color: green;
-}
-
-.neutral {
-  color: purple;
-}
-
-.bad {
-  color: red;
 }
