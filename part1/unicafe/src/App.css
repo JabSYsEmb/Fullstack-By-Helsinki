@@ -3,6 +3,27 @@ button:hover{
   background-color: gray;
   color:            blue;
 }
-p,h1 {
+
+p, h1 {
   color: #0707AD;
+}
+
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+}
+
+td{
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(71, 71, 71);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245,245,245);
 }

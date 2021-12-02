@@ -1,30 +1,28 @@
 import { useState } from 'react';
 import './App.css';
 
-const Statistics  = ({data}) =>  {
-  return isSumZero(data) ? dataNotFound() : getStatistics(data);
-}    
+const Statistics  = ({data}) =>  isSumZero(data) ? dataNotFound() : getStatistics(data)    
 
 const getStatistics          = (data) => (
-  <>
+  <table>
     {Object.entries(data).map((item) => 
           < StatisticsLine key={item[0]} value={item[1]} msg={item[0]} />)}
     {Object.entries(getRemainingStatistics(data)).map((item) => 
           < StatisticsLine key={item[0]} value={item[1]} msg={item[0]} />)}
-  </>
+  </table>
 )
 
 const FeedbackButtons        = ({data}) => Object.entries(data).map((item) =>
   <Button key={item[0]} onClick={item[1]} text={item[0]} />
 );
 
-const getRemainingStatistics = (data) => {
-  return {
+const getRemainingStatistics = (data) => (
+  {
     sum     : sumOfFeedbacks(data),
     average : findAverageOfFeedbacks(data),
     postive : findPositiveRatioInFeedbacks(data)
   }
-}
+)
 
 const findAverageOfFeedbacks       = (feedbacks) => (
   isSumZero(feedbacks) ? dataNotFound() : fixFloat((feedbacks.good+feedbacks.bad)/sumOfFeedbacks(feedbacks),4)
@@ -34,7 +32,15 @@ const findPositiveRatioInFeedbacks = (feedbacks) => (
   isSumZero(feedbacks) ? dataNotFound() : fixFloat(feedbacks.good/sumOfFeedbacks(feedbacks),3) * 100 + " %"
 )
 
-const StatisticsLine  = ({value,msg})    => <tr >{msg} : {value}</tr>
+const StatisticsLine  = ({value,msg})    => (
+            <tbody>
+              <tr>
+                <td>{msg}</td> 
+                <td>{value}</td>
+              </tr>
+            </tbody>
+)
+
 const dataNotFound    = ()               => <p>No feedbacks given</p>
 
 const sumOfFeedbacks  = (feedbacks)      => Object.entries(feedbacks).reduce((result,item) => (result+item[1]),0);
@@ -61,8 +67,6 @@ function App() {
     bad     : () => updateData({...data, bad     : data.bad + 1    } )
   }
 
-
-  // console.log(Object.entries(feedbacks).map(item => item[0]+ " : " +item[1]))
   return (
     <>
       < Header header={feedback_header}   />
