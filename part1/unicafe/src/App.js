@@ -12,6 +12,15 @@ const getStatistics          = (data) => (
   </table>
 )
 
+const StatisticsLine  = ({value,msg})    => (
+            <tbody>
+              <tr>
+                <td>{msg}</td> 
+                <td>{value}</td>
+              </tr>
+            </tbody>
+)
+
 const FeedbackButtons        = ({data}) => Object.entries(data).map((item) =>
   <Button key={item[0]} onClick={item[1]} text={item[0]} />
 );
@@ -30,15 +39,6 @@ const findAverageOfFeedbacks       = (feedbacks) => (
 
 const findPositiveRatioInFeedbacks = (feedbacks) => (
   isSumZero(feedbacks) ? dataNotFound() : fixFloat(feedbacks.good/sumOfFeedbacks(feedbacks),3) * 100 + " %"
-)
-
-const StatisticsLine  = ({value,msg})    => (
-            <tbody>
-              <tr>
-                <td>{msg}</td> 
-                <td>{value}</td>
-              </tr>
-            </tbody>
 )
 
 const dataNotFound    = ()               => <p>No feedbacks given</p>
