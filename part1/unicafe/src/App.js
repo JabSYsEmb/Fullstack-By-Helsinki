@@ -14,6 +14,9 @@ const getStatistics            = (data) => (
         < StatisticsLine key={item[0]} value={item[1]} msg={item[0]} />)}
   </>
 )
+const FeedbackButtons = ({data}) => Object.entries(data).map((item) =>
+  <Button key={item[0]} onClick={item[1]} text={item[0]} />
+);
 
 const getRemainingStatistics   = (data) => {
   const metrics = {
@@ -49,23 +52,25 @@ function App() {
   const feedback_header   = "Give feedback";
   const statistics_header = "Statistics";
   
-  const [data, updateFeedbacks] = useState({
+  const [data, updateData] = useState({
     good    : 0,
     neutral : 0,
     bad     : 0
   });
-  
-  const giveGood    = () => updateFeedbacks({...data, good    : data.good + 1   } )
-  const giveNeutral = () => updateFeedbacks({...data, neutral : data.neutral + 1} )
-  const giveBad     = () => updateFeedbacks({...data, bad     : data.bad + 1    } )
+
+  const dataUpdaters = {
+    good    : () => updateData({...data, good    : data.good + 1   } ),
+    neutral : () => updateData({...data, neutral : data.neutral + 1} ),
+    bad     : () => updateData({...data, bad     : data.bad + 1    } )
+  }
+
+
   // console.log(Object.entries(feedbacks).map(item => item[0]+ " : " +item[1]))
   return (
     <div className="App">
       <header className="hello-world">
         < Header header={feedback_header}   />
-        < Button onClick={giveGood}    text="Good"    className="good"    />
-        < Button onClick={giveNeutral} text="Neutral" className="neutral" />
-        < Button onClick={giveBad}     text="Bad"     className="bad"     />
+        < FeedbackButtons data={dataUpdaters} />
         < Header header={statistics_header} />
         < Statistics data={data}/>
       </header>
