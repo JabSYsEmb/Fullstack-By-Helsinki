@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-COPY . .
+COPY . /home/app//
 
 EXPOSE 3000
 
