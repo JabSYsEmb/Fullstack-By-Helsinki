@@ -1,19 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import Note from './components/Note';
 
 function App({notes}) {
-  console.log(notes)
   return (
     <div>
       <h1>Notes</h1>
       <ul>
         {
-          notes?.map(item => {
-            console.log("I've entered the lop");
-            return (
-              <li key={item.id}>{item.content }</li>
-            )
-          })
+          notes?.map(item => <Note key={item} note={item}/>)
         }
       </ul>
     </div>
