@@ -6,6 +6,6 @@ EXPOSE 3000
 
 RUN apt-get update &&\
 		apt-get install -y npm	&&\
-		npm install
+		npm build
 
-CMD ["npm","start"]
+# CMD ["npm","start"]
