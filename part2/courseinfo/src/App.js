@@ -46,7 +46,7 @@ const App = () => {
   }
 ]
 
-  return course.map(item => <Course course={item} />)
+  return course.map(item => <Course key={item.name} course={item} />)
 }
 
 export default App;
