@@ -2,7 +2,7 @@ import {useState} from 'react';
 
 function App() {
 
-  const [phonebook, setPhonebook] = useState([{name : "Cabbar Serif", phone: "10203023"}])
+  const [phonebook, setPhonebook] = useState([{name : "Cabbar Serif", phone: "537-5259900", id : 1}])
   const [newName, setNewName] = useState('new name');
   const [newNumber, setNewNumber] = useState('new number');
 
@@ -14,7 +14,7 @@ function App() {
   }
 
   const alertNameFound = () => {
-    alert(`${newName} is already added to phonebook!`)
+    alert(`${newNumber} is already added to phonebook!`)
   }
 
   const handleNewName = (e) => {
@@ -27,11 +27,16 @@ function App() {
   const clearBox = (setFunc) => {
     setFunc('')
   }
+  const isUserInPhonebook = (item) => {
+    return (item.name === newName && item.phone === newNumber) | (item.phone === newNumber) ? true:false;
+  }
 
+  const TableLine = ({name, phone}) => <tbody><tr><td>{name}</td><td>{phone}</td></tr></tbody>;
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPerson = {name : newName, phone: newNumber}
-    phonebook.find(item => JSON.stringify(item) === JSON.stringify(newPerson)) ? alertNameFound() : updatePhonebookAndClearInput(newPerson)
+    const newPerson = {name : newName, phone: newNumber, id: phonebook.length+1}
+    phonebook.find(item => isUserInPhonebook(item)) ? alertNameFound() : updatePhonebookAndClearInput(newPerson)
   }
 
   return (
@@ -45,9 +50,9 @@ function App() {
         <div><button type="submit" onClick={handleSubmit}>add</button></div>
       </form>
       <h2>Numbers</h2>
-      <>
-        {phonebook.map(item => <p key={item.name}>{item.name} {item.phone}</p>)}
-      </>
+      <table>
+        {phonebook.map(item => <TableLine key={item.phone} name={item.name} phone={item.phone}/>)}
+      </table>
     </div>
   );
 }
