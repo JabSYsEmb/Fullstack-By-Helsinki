@@ -1,15 +1,14 @@
-import Course from './components/Course';
-import {useState} from 'react';
-
-let data = [];
-
 const xhttp = new XMLHttpRequest();
-
 
 xhttp.onreadystatechange = () => {
   if (xhttp.readyState === 4 && xhttp.status === 200){
     console.log("done")
-    JSON.parse(xhttp.responseText).map(item => data.push(item))
+    JSON.parse(xhttp.responseText).map(
+      item => {
+        let elment = document.createElement('li')
+        elment.appendChild(document.createTextNode(item.content))
+        document.getElementsByClassName("div-content")[0].appendChild(elment)
+    })
   }
 }
 
@@ -17,13 +16,11 @@ xhttp.open('GET', 'http://localhost:3003/notes', true)
 xhttp.send()
 
 const App = () => {
-  const [item, setItem] = useState(true);
-  console.log(data)
+
   return (
     <>
     <h1>Data</h1>
-    {data?.map(item => <p key={item.content}>{item.content}</p>)}
-    <button onClick={() => setItem(!item)}>pressMe</button>
+    <ul className="div-content"></ul>
     </>
     )
 }
