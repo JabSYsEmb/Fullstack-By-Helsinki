@@ -1,52 +1,31 @@
 import Course from './components/Course';
+import {useState} from 'react';
+
+let data = [];
+
+const xhttp = new XMLHttpRequest();
+
+
+xhttp.onreadystatechange = () => {
+  if (xhttp.readyState === 4 && xhttp.status === 200){
+    console.log("done")
+    JSON.parse(xhttp.responseText).map(item => data.push(item))
+  }
+}
+
+xhttp.open('GET', 'http://localhost:3003/notes', true)
+xhttp.send()
 
 const App = () => {
-  const course = [
-    {
-    id: 1,
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3
-      },
-      {
-        name: 'Redux',
-        exercises: 11,
-        id: 4
-      }
-    ]
-  },
-  {
-    name: 'Node.js',
-    id: 2,
-    parts: [
-      {
-        name: 'Routing',
-        exercises: 3,
-        id: 1
-      },
-      {
-        name: 'Middlewares',
-        exercises: 7,
-        id: 2
-      }
-    ]
-  }
-]
-
-  return course.map(item => <Course key={item.name} course={item} />)
+  const [item, setItem] = useState(true);
+  console.log(data)
+  return (
+    <>
+    <h1>Data</h1>
+    {data?.map(item => <p key={item.content}>{item.content}</p>)}
+    <button onClick={() => setItem(!item)}>pressMe</button>
+    </>
+    )
 }
 
 export default App;
