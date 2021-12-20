@@ -1,11 +1,11 @@
 FROM node
 
-COPY . /root/app/
-
 WORKDIR /root/app/
+
+# COPY . .
 
 EXPOSE 3000
 
-RUN npm install
+# RUN npm install /root/app/
 
 CMD ["npm","start"]

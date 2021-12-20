@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  website:
+    build:
+      context: ./website/
+    ports: 
+    - 3001:3000
+    volumes:
+      - ./website:/root/app/
+    container_name: website
+  
+  server:
+    image: clue/json-server
+    #build:
+    #context: ./server/
+    ports: 
+    - '127.0.0.1:3002:80'
+    volumes:
+      - ./server/data.json:/data/db.json
+    container_name: server
