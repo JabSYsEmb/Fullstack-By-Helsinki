@@ -1,11 +1,11 @@
-FROM ubuntu:18.04
+FROM node
 
 COPY . /root/app/
 
+WORKDIR /root/app/
+
 EXPOSE 3000
 
-RUN apt-get update &&\
-		apt-get install -y npm	&&\
-		npm build
+RUN npm install
 
-# CMD ["npm","start"]
+CMD ["npm","start"]
