@@ -1,3 +1,5 @@
+import React from 'react';
+
 let data;
 
 const xhttp = new XMLHttpRequest();
