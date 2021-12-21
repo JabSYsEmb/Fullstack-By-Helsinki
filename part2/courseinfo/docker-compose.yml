@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  website:
-    build:
-      context: ./website/
-    ports: 
-    - 3001:3000
-    volumes:
-      - ./website:/root/app/
-    container_name: website
+  #website:
+  #build:
+  #context: ./website/
+  #ports: 
+  #- 3001:3000
+  #volumes:
+  #- ./website:/root/app/
+  #container_name: website
   
   server:
     image: clue/json-server
