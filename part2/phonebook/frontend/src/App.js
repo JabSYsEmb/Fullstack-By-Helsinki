@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import React ,{useState} from 'react';
+import './App.css';
 
 function App() {
 
@@ -31,7 +32,19 @@ function App() {
     return (item.name === newName && item.phone === newNumber) | (item.phone === newNumber) ? true:false;
   }
 
-  const TableLine = ({name, phone}) => <tbody><tr><td>{name}</td><td>{phone}</td></tr></tbody>;
+  const TableHead = () => <thead><tr><th scope="col">Name</th><th scope="col">Phone</th></tr></thead>
+  const TableContent = ({name,phone}) => <tr><td>{name}</td><td>{phone}</td></tr>;
+  const TableLine = ({name, phone}) => 
+                        <tbody>
+                          <TableContent name={name} phone={phone}/>
+                        </tbody>;
+  const Table = () => 
+  (
+    <table>
+      <TableHead/>
+      {phonebook.map(item => <TableLine key={item.phone} name={item.name} phone={item.phone}/>)}
+    </table>
+  )
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,9 +63,7 @@ function App() {
         <div><button type="submit" onClick={handleSubmit}>add</button></div>
       </form>
       <h2>Numbers</h2>
-      <table>
-        {phonebook.map(item => <TableLine key={item.phone} name={item.name} phone={item.phone}/>)}
-      </table>
+      <Table />
     </div>
   );
 }
