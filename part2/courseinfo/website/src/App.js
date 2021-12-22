@@ -6,7 +6,6 @@ const App = () => {
   const [notes, setNotes] = useState([])
   
   useEffect(() => {
-    document.title = `${count} times clicked`;
     console.log('effect')
     axios
     .get('http://localhost:3002/notes')
@@ -17,6 +16,8 @@ const App = () => {
     })
   }, [])
 
+  useEffect(() => {document.title = `${count} times clicked`})
+  
   console.log('render',notes.length, 'notes');
 
   return (
