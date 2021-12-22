@@ -1,0 +1,13 @@
+table {
+    display: table;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid grey;
+    padding: 0.5em;
+}
+
+th {
+    background-color: indianred;
+}

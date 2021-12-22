@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend/
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - ./frontend:/root/app/
+    container_name: frontend
+
+  backend:
+    image: clue/json-server
+    ports:
+      - '127.0.0.1:3002:80'
+    volumes:
+      - ./backend/data.json:/data/db.json
+    container_name: backend
