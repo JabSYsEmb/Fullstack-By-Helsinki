@@ -1,4 +1,5 @@
-import React ,{useState} from 'react';
+import React ,{useState, useEffect} from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
@@ -7,6 +8,13 @@ function App() {
   const [newName, setNewName] = useState('new name');
   const [newNumber, setNewNumber] = useState('new number');
 
+  useEffect(() => {
+    axios.get('http://127.0.0.1:3002/persons').then(
+      item => {
+        setPhonebook(item.data); 
+      }
+    )
+  },[])
 
   const updatePhonebookAndClearInput = (newPerson) => {
     setPhonebook(phonebook.concat(newPerson))
@@ -31,20 +39,18 @@ function App() {
   const isUserInPhonebook = (item) => {
     return (item.name === newName && item.phone === newNumber) | (item.phone === newNumber) ? true:false;
   }
-
-  const TableHead = () => <thead><tr><th scope="col">Name</th><th scope="col">Phone</th></tr></thead>
-  const TableContent = ({name,phone}) => <tr><td>{name}</td><td>{phone}</td></tr>;
-  const TableLine = ({name, phone}) => 
-                        <tbody>
-                          <TableContent name={name} phone={phone}/>
-                        </tbody>;
-  const Table = () => 
+  
+  const Table = ({phonebook}) => 
   (
     <table>
       <TableHead/>
-      {phonebook.map(item => <TableLine key={item.phone} name={item.name} phone={item.phone}/>)}
+      {phonebook.map(item => <TableLine key={item.id} name={item.name} phone={item.number}/>)}
     </table>
   )
+  const TableHead = () => <thead><tr><th scope="col">Name</th><th scope="col">Phone</th></tr></thead>
+  const TableLine = ({name, phone}) => <tbody><TableContent name={name} phone={phone}/></tbody>;
+  const TableContent = ({name,phone}) => <tr><td>{name}</td><td>{phone}</td></tr>;
+  // const TableFoot = () => <tfoot></tfoot>
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +69,7 @@ function App() {
         <div><button type="submit" onClick={handleSubmit}>add</button></div>
       </form>
       <h2>Numbers</h2>
-      <Table />
+      <Table phonebook={phonebook}/>
     </div>
   );
 }

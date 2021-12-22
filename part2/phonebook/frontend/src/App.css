@@ -1,8 +1,13 @@
 table {
     display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: grey;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid grey;
+    padding: 0.5em;
+}
+
+th {
+    background-color: indianred;
 }
