@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-let fireEffect = 0;
-
 const App = () => {
   const [count, setCount] = useState(0)
   const [notes, setNotes] = useState([])
   
   useEffect(() => {
+    document.title = `${count} times clicked`;
     console.log('effect')
     axios
     .get('http://localhost:3002/notes')
@@ -16,7 +15,7 @@ const App = () => {
       console.log('effect fullfilled')
       setNotes(promises.data)
     })
-  }, [fireEffect])
+  }, [])
 
   console.log('render',notes.length, 'notes');
 
