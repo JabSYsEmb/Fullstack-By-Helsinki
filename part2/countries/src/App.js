@@ -1,8 +1,14 @@
 import React, {useEffect,useState} from 'react';
-import './App.css';
 import axios from 'axios';
+import './App.css';
 
-const CountryHtml = ({country}) => country ? <Country country={country}/>:<NoDataHtml />
+const MatchesCountryHtml = ({data}) => 
+      isLengthSmallerThen(data.length,10) ? data.map((item, index )=> <CountryName key={index} country={item}/>):<TooMuchData />
+const TooMuchData = () => <p className="no-data">Too many countries</p>
+const CountryName = ({country}) => <p>{country.name.common}</p>
+const isLengthSmallerThen = (length,then) => length < then;
+
+const CountryHtml = ({country}) => country ? <Country country={country}/>:<NoDataHtml/>
 const NoDataHtml = () => <p className="no-data">No data has been found.</p>
 const Country = ({country}) => {
 return (
@@ -10,7 +16,7 @@ return (
   <CountryHeader country={country} />
   <CountryInfo country={country}/>
   <CountrySpokenLangauge country={country} />
-  <CountryFlag url={country.flags.svg}/>
+  <CountryFlag country={country}/>
 </>)
 }
 
@@ -41,7 +47,7 @@ const Langauges = ({languages}) => {
   }
   return langs;
 }
-const CountryFlag = ({url}) => <img className="flag-class" src={url} alt="country-flag"/>
+const CountryFlag = ({country}) => <img className="flag-class" src={country.flags.svg} alt="country-flag"/>
 
 
 const App = () => {
@@ -49,19 +55,23 @@ const App = () => {
   const [showFound, setShowFound] = useState(false)
   const [country, setCountry] = useState(undefined)
   const [countries, setCountries] = useState([])
+  const [data, setData] = useState([])
 
   useEffect(() => {
-    axios.get('https://restcountries.com/v3.1/all').then(item => setCountries(item.data))
+    axios.get('https://restcountries.com/v3.1/all').then(item => setData(item.data))
     console.log('return handler')
   },[])
 
   const searchHandler = (event) => {
     setSearch(event.target.value)
-    setCountry(countries.find(item => item.name.common === event.target.value))
+    setCountry(data.find(item => isThoseStringIdentical(item.name.common,event.target.value)))
+    setCountries(data.filter(item => doesStringMatchString(item.name.common,event.target.value)))
     setShowFound(false)
   }
 
-  const formOnSubmit = (event) => {
+  const isThoseStringIdentical = (first_string, second_string) => first_string === second_string;
+  const doesStringMatchString = (first_string, second_string) => first_string.includes(second_string);
+  const searchBtnHandler = (event) => {
     event.preventDefault();
     setShowFound(true);
   }
@@ -70,15 +80,14 @@ const App = () => {
     setShowFound(false)
     setState('')
   }
-  
   return (
     <div>
       <h1>Hello World</h1>
       <form>
         <input value={search} onChange={searchHandler} onClick={()=>cleanInput(setSearch)}/>
-        <button type="submit" onClick={formOnSubmit}>search</button>
-        <button type="submit" onClick={formOnSubmit}>match</button>
+        <button type="submit" onClick={searchBtnHandler}>search</button>
       </form>
+      {showFound ? <></>:<MatchesCountryHtml data={countries}/>}
       {showFound ? < CountryHtml country={country}/>:<></>}
     </div>
   );
