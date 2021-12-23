@@ -1,0 +1,15 @@
+.no-data {
+    color: red;
+    font-family:'Courier New', Courier, monospace;
+    size: 5px;
+}
+
+.flag-class {
+    width: calc(height * 1.5);
+    height: 120px;
+    border: 2px solid black;
+}
+
+.country-info {
+    font-weight: bold;
+}
