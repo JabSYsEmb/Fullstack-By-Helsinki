@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import NotesHtml from './components/Note'
 import axios from 'axios';
 
 const jsonServerUrl = 'http://localhost:3002/notes'
@@ -37,7 +38,7 @@ const App = () => {
   return (
     <>
       <ul>
-        {notes.map(item => <li key={item.id}>{item.content}</li>)}
+        <NotesHtml notes={notes} />
       </ul>
       <form >
         <input value={newNote} onChange={newNoteChangeHandler}/>
