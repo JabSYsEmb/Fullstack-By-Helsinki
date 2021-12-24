@@ -1,54 +1,7 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState} from 'react'
+import {CountryHtml,MatchesCountryHtml} from './components/CountryHtml'
 import axios from 'axios';
 import './App.css';
-
-const MatchesCountryHtml = ({data}) => 
-      isLengthSmallerThen(data.length,10) ? data.map((item, index )=> <CountryName key={index} country={item}/>):<TooMuchData />
-const TooMuchData = () => <p className="no-data">Too many countries</p>
-const CountryName = ({country}) => <p>{country.name.common}</p>
-const isLengthSmallerThen = (length,then) => length < then;
-
-const CountryHtml = ({country}) => country ? <Country country={country}/>:<NoDataHtml/>
-const NoDataHtml = () => <p className="no-data">No data has been found.</p>
-const Country = ({country}) => {
-return (
-<>
-  <CountryHeader country={country} />
-  <CountryInfo country={country}/>
-  <CountrySpokenLangauge country={country} />
-  <CountryFlag country={country}/>
-</>)
-}
-
-const CountryHeader = ({country}) => <h2>{country.name.common}</h2>
-const CountryInfo   = ({country}) => {
-  return (
-  <div className="country-info" >
-    <p>Capital : {country.capital[0]}</p>
-    <p>population : {country.population}</p>
-  </div>
-  )
-}
-
-const CountrySpokenLangauge = ({country}) => {
-  return (
-    <>
-      <h2>Languages</h2>
-      <ul>
-        {< Langauges languages={country.languages}/>}
-      </ul>
-    </>
-  )
-}
-const Langauges = ({languages}) => {
-  const langs = [];
-  for (const lang in languages) {
-    langs.push(<li key={lang}>{languages[lang]}</li>)
-  }
-  return langs;
-}
-const CountryFlag = ({country}) => <img className="flag-class" src={country.flags.svg} alt="country-flag"/>
-
 
 const App = () => {
   const [search, setSearch] = useState('search for a country')
@@ -62,15 +15,18 @@ const App = () => {
     console.log('return handler')
   },[])
 
+
   const searchHandler = (event) => {
-    setSearch(event.target.value)
-    setCountry(data.find(item => isThoseStringIdentical(item.name.common,event.target.value)))
-    setCountries(data.filter(item => doesStringMatchString(item.name.common,event.target.value)))
+    let search_value = event.target.value;
+    setSearch(search_value)
+    setCountry(data.find(item => isThoseStringIdenticalCaseInsensitive(item.name.common,search_value)))
+    setCountries(data.filter(item => doesStringMatchStringCaseInsensitive(item.name.common,search_value)))
     setShowFound(false)
   }
 
-  const isThoseStringIdentical = (first_string, second_string) => first_string === second_string;
-  const doesStringMatchString = (first_string, second_string) => first_string.includes(second_string);
+  const isThoseStringIdenticalCaseInsensitive = (first_string, second_string) => first_string.toUpperCase() === second_string.toUpperCase()
+  const doesStringMatchStringCaseInsensitive = (first_string, second_string) => first_string.toUpperCase().includes(second_string.toUpperCase())
+
   const searchBtnHandler = (event) => {
     event.preventDefault();
     setShowFound(true);
@@ -87,8 +43,8 @@ const App = () => {
         <input value={search} onChange={searchHandler} onClick={()=>cleanInput(setSearch)}/>
         <button type="submit" onClick={searchBtnHandler}>search</button>
       </form>
-      {showFound ? <></>:<MatchesCountryHtml data={countries}/>}
-      {showFound ? < CountryHtml country={country}/>:<></>}
+      {!showFound && <MatchesCountryHtml data={countries}/>}
+      {showFound && < CountryHtml country={country}/>}
     </div>
   );
 }
