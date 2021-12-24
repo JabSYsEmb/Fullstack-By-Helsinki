@@ -10,7 +10,6 @@ const App = () => {
   const addNewNote = (event) => {
     event.preventDefault()
     const newDataInstance = {
-      id:         notes.length+1,
       date:       new Date().toString(),
       content:    newNote,
       important:  Math.random() < 0.5
@@ -19,14 +18,13 @@ const App = () => {
   }
 
   const postDataToTheServer = (serverUrl, newData) => {
-    axios.post(serverUrl,newData).then(
-      response=>
-        {
-          setNotes(notes.concat(response.data))
-          setNewNote('')
-        }
-      )
+    axios.post(serverUrl,newData).then(response => handleResponseFromServer(response))
   } 
+  
+  const handleResponseFromServer = (response) => {
+    setNotes(notes.concat(response.data))
+    setNewNote('')
+  }
   
   useEffect(() => {
     axios.get(jsonServerUrl).then((promises) => {setNotes(promises.data)})
