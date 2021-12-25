@@ -3,7 +3,13 @@ import axios from 'axios'
 const baseUrl = `http://localhost:3002/notes`
 
 const getAll = () => {
-    return axios.get(baseUrl).then(response => response.data)
+    const nonExisting = {
+        id: 10000,
+        content: 'This note is not saved to server',
+        date: '2019-05-30T17:30:31.098Z',
+        important: true,
+      }
+    return axios.get(baseUrl).then(response => response.data.concat(nonExisting))
 }
 
 const update = (id, changedNote) =>  {
@@ -11,11 +17,7 @@ const update = (id, changedNote) =>  {
 }
 
 const create = (newObject) => {
-    return axios.post(baseUrl,newObject).then(response => response.data)
+    return axios.post(baseUrl,newObject)
 }
 
-export default {
-    getAll : getAll,
-    update : update,
-    create : create 
-}
+export default {getAll, update, create}
