@@ -1,7 +1,10 @@
-.important {
-    visibility: visible;
+.importance {
+    color: white;
+    background-color:#20367e;
+    text-align:center;
 }
 
-.not-important {
-    visibility: hidden;
+.importance:hover{
+    background-color: rgb(107, 18, 18);
+    cursor: pointer;
 }

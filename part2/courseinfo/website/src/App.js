@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react'
+import services from './services/communication'
 import NotesHtml from './components/Note'
-import axios from 'axios';
-
-const jsonServerUrl = 'http://localhost:3002/notes'
+import Form from './components/Form'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -15,35 +14,33 @@ const App = () => {
       content:    newNote,
       important:  Math.random() < 0.5
     }
-    postDataToTheServer(jsonServerUrl,newDataInstance)
+    services.create(newDataInstance).then(response => handleResponseFromServer(response))
   }
 
-  const postDataToTheServer = (serverUrl, newData) => {
-    axios.post(serverUrl,newData).then(response => handleResponseFromServer(response))
-  } 
-  
   const handleResponseFromServer = (response) => {
-    setNotes(notes.concat(response.data))
+    setNotes(notes.concat(response))
     setNewNote('')
   }
   
   useEffect(() => {
-    axios.get(jsonServerUrl).then((promises) => {setNotes(promises.data)})
+    services.getAll().then((promises) => {setNotes(promises)})
   }, [])
   
   const newNoteChangeHandler = (event) => {
     setNewNote(event.target.value)
   }
 
+  const toggleImportanceOf = (note) => {
+    let changedNote = {...note, important: !note.important}
+    services.update(note.id,changedNote).then(response => {
+      setNotes(notes.map(item => item.id === response.id ? changedNote : item))
+    })
+  }
+
   return (
     <>
-      <ul>
-        <NotesHtml notes={notes} />
-      </ul>
-      <form >
-        <input value={newNote} onChange={newNoteChangeHandler}/>
-        <button type="submit" onClick={addNewNote}>add note</button>
-      </form>
+      <NotesHtml notes={notes} toggleImportance={toggleImportanceOf} />      
+      <Form newNote={newNote} onChange={newNoteChangeHandler} onClick={addNewNote} />
     </>
     )
 }

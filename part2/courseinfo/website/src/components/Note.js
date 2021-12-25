@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../style/note.css'
 
-const NotesHtml = ({notes}) => {
+const NotesHtml = ({notes,toggleImportance}) => {
     return (
-        notes.map(item => <Note key={item.id} note={item} />)
+        <ul>
+            {notes.map(note => <Note key={note.id} note={note} toggleImportance={toggleImportance}/>)}
+        </ul>
     )
 }
 
-const Note = ({note}) => {
-    const [show, setShow] = useState(false);
+const Note = ({note,toggleImportance}) => {
+    const label = note.important ? "make not important":"make important"
     
-    const label = note.important ? "important note":"not important note"
     return (
         <li className="note-item">
             {note.content}
-            <button onClick={()=>setShow(!show)}>showImportance</button>
-            <p className={show ? "important":"not-important"}>{label}</p>
+            <button className="importance" onClick={() => toggleImportance(note)}>{label}</button>
         </li>
     )
 }
