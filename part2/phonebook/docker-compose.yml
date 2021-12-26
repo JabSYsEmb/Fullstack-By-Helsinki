@@ -8,6 +8,8 @@ services:
       - 3000
     volumes:
       - ./frontend:/root/app/
+    environment:
+      - VIRTUAL_HOSTS=frontend.colasloth.com
     container_name: frontend
 
   backend:
@@ -16,6 +18,8 @@ services:
       - 80
     volumes:
       - ./backend/data.json:/data/db.json
+    environment:
+      - VIRTUAL_HOSTS=backend.colasloth.com
     container_name: backend
 
   nginx:
