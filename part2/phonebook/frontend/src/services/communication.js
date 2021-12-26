@@ -1,5 +1,5 @@
 import axios from 'axios'
-const urlBase = 'http://127.0.0.1:3002/persons'
+const urlBase = 'backend/'
 
 const getAll = () => {
     return axios.get(urlBase)
