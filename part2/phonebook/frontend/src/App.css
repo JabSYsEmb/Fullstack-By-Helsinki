@@ -11,3 +11,7 @@ td, th {
 th {
     background-color: indianred;
 }
+
+.phonebook h2::first-letter {
+    font-size: 2em;
+}
