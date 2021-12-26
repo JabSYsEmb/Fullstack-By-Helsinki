@@ -22,8 +22,16 @@ const create = (newObj) => {
                 .finally(() => console.log('create() function'))
 }
 
+const deleteByID = (id) => {
+    return axios.delete(`${urlBase}/${newObj}`)
+                .then(response => response.data)
+                .catch(() => console.log('Person was not deleted.'))
+                .finally(() => console.log('deleteByID() function'))
+}
+
 export default {
-    getAll : getAll,
-    create : create,
-    update : update
+    getAll     : getAll,
+    create     : create,
+    update     : update,
+    deleteByID : deleteByID
 }
