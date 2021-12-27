@@ -1,5 +1,5 @@
 import axios from 'axios'
-const urlBase = 'backend/'
+const urlBase = 'backend'
 
 const getAll = () => {
     return axios.get(urlBase)
@@ -16,14 +16,14 @@ const update = (id,newObj) => {
 }
 
 const create = (newObj) => {
-    return axios.post(urlBase,newObj)
+    return axios.post(`${urlBase}/`,newObj)
                 .then(response => response.data)
                 .catch(() => console.log('Person was not able to be sent to server.'))
                 .finally(() => console.log('create() function'))
 }
 
 const deleteByID = (id) => {
-    return axios.delete(`${urlBase}/${newObj}`)
+    return axios.delete(`${urlBase}/${id}`)
                 .then(response => response.data)
                 .catch(() => console.log('Person was not deleted.'))
                 .finally(() => console.log('deleteByID() function'))

@@ -1,36 +1,50 @@
-const TableHead = () => (
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Phone</th>
-        </tr>
-    </thead>
-)
+import services from '../services/communication'
 
-const TableLine = ({name, phone}) => (
-    <tbody>
-        <TableContent name={name} phone={phone}/>
-    </tbody>
-)
-
-const TableContent = ({name,phone}) => (
-    <tr>
-        <td>{name}</td>
-        <td>{phone}</td>
-    </tr>
-)
+const TableHtml = ({phonebook}) => <Table phonebook={phonebook} />
 
 const Table = ({phonebook}) => 
 (
     <div className="phonebook">
     <h2>Numbers</h2>
     <table>
-        <TableHead />
-        {phonebook.map(item => <TableLine key={item.id} name={item.name} phone={item.number}/>)}
+        <TableHead simple={phonebook[0]}/>
+        <TableBody phonebook={phonebook} />
     </table>
 </div>
 )
 
-const TableHtml = ({phonebook}) => <Table phonebook={phonebook} />
+const GetNamesOfInstanceAsThArray = ({simple}) => Object.keys(simple).map(entry=> <th key={entry}>{entry}</th>).concat(<th key="delete">delete</th>)
+
+const TableHead = ({simple}) => 
+{
+    return (
+        <thead>
+            <tr>
+                {simple && <GetNamesOfInstanceAsThArray simple={simple} />}
+            </tr>
+        </thead>
+    )
+}
+
+const TableBody = ({phonebook}) => 
+{
+    return phonebook?.map(contact => <TableLine key={contact.id} contact={contact}/>)
+}
+const TableLine = ({contact}) => (
+    <tbody>
+        <TableContent contact={contact}/>
+    </tbody>
+)
+
+const ArrayOfTd = ({contact}) => Object.values(contact).map(entry => <td key={entry}>{entry}</td>)
+
+const TableContent = ({contact}) => (
+    <tr>
+        <ArrayOfTd contact={contact} />
+        <td><DeleteBtn contact={contact}/></td>
+    </tr>
+)
+
+const DeleteBtn = ({contact}) => <button>delete</button> 
 
 export default TableHtml;  

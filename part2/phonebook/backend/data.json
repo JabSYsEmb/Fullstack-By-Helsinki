@@ -4,22 +4,38 @@
     { 
       "name": "Arto Hellas", 
       "number": "040-123456",
-      "id": 1
+      "openClosedTime"	:	"Closing 22:45",
+      "openingClosingDate"	:	"Opening 13:00 - Closing 22:45",
+      "isReviewEnabled"	:	true,
+      "id": 1,
+      "isDynamic": "yes"
     },
     { 
       "name": "Ada Lovelace", 
       "number": "39-44-5323523",
-      "id": 2
+      "openClosedTime"	:	"Closing 22:45",
+      "openingClosingDate"	:	"Opening 13:00 - Closing 22:45",
+      "isReviewEnabled"	:	true,
+      "id": 2,
+      "isDynamic": "yes"
     },
     { 
       "name": "Dan Abramov", 
       "number": "12-43-234345",
-      "id": 3
+      "openClosedTime"	:	"Closing 22:45",
+      "openingClosingDate"	:	"Opening 13:00 - Closing 22:45",
+      "isReviewEnabled"	:	true,
+      "id": 3,
+      "isDynamic": "yes"
     },
     { 
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122",
-      "id": 4
+      "openClosedTime"	:	"Closing 22:45",
+      "openingClosingDate"	:	"Opening 13:00 - Closing 22:45",
+      "isReviewEnabled"	:	true,
+      "id": 4,
+      "isDynamic": "yes"
     }
   ]
 }
