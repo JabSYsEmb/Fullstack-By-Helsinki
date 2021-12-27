@@ -14,7 +14,9 @@ const App = () => {
       content:    newNote,
       important:  Math.random() < 0.5
     }
-    services.create(newDataInstance).then(response => handleResponseFromServer(response))
+    services.create(newDataInstance).then(response => {
+      handleResponseFromServer(response)
+    })
   }
 
   const handleResponseFromServer = (response) => {
@@ -42,9 +44,19 @@ const App = () => {
     )
   }
 
+  const trimNoteFromNotes = (note) => {
+    setNotes(notes.filter(item => item.id !== note.id))
+  }
+
+  const deleteById = (id) => {
+    let deletedNote = notes.find(item => item.id === id)
+    deletedNote && trimNoteFromNotes(deletedNote);services.deleteById(id)
+  }
+
+
   return (
     <>
-      <NotesHtml notes={notes} toggleImportance={toggleImportanceOf} />      
+      <NotesHtml notes={notes} toggleImportance={toggleImportanceOf} deleteById={deleteById}/>      
       <Form newNote={newNote} onChange={newNoteChangeHandler} onClick={addNewNote} />
     </>
     )

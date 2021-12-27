@@ -1,21 +1,9 @@
 li::first-letter{
     font-size: 2em;
-    color:crimson;
+    color:black;
+    text-transform: capitalize;
 }
 
-.note-item > button{
-    color: red;
-    background-color:#23e;
-    text-align:center;
-}
-/* 
-.importance {
-    color: white;
-    background-color:#20367e;
-    text-align:center;
-} */
-
-.importance:hover{
-    background-color: rgb(107, 18, 18);
+button:hover{
     cursor: pointer;
 }
