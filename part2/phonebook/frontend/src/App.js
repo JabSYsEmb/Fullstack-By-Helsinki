@@ -1,9 +1,10 @@
 import React ,{useState, useEffect} from 'react'
+import services from './services/communication'
 import './App.css';
 
 import PhonebookForm from './components/phonebookForm'
-import services from './services/communication'
 import TableHtml from './components/table'
+import Search from './components/searchInput'
 
 function App() {
   const [phonebook, setPhonebook] = useState([])
@@ -14,8 +15,9 @@ function App() {
 
   return (
     <div>
+      <Search        phonebook={phonebook} />
       <PhonebookForm phonebook={phonebook} setPhonebook={setPhonebook}/>
-      <TableHtml     phonebook={phonebook}/>
+      <TableHtml     phonebook={phonebook} />
     </div>
   );
 }
