@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  node_modules:
+
 services:
   frontend:
     build:
@@ -8,6 +11,7 @@ services:
       - 3000
     volumes:
       - ./frontend:/root/app/
+      - node_modules:/root/app/node_modules
     environment:
       - VIRTUAL_HOSTS=frontend.colasloth.com
     container_name: frontend
