@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import services from '../services/communication'
+import '../style/phonebookForm.css'
 
 
 
 const PhonebookForm = ({phonebook,setPhonebook}) => {
     const [newName, setNewName] = useState('new name');
+    const [previouseName, setPreviouseName] = useState('');
     const [newNumber, setNewNumber] = useState('new number');
+    const [newContactAdded, setNewContactAdded] = useState(false);
 
     const handleNewName = (e) => {
         setNewName(e.target.value)
@@ -36,12 +39,22 @@ const PhonebookForm = ({phonebook,setPhonebook}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newPerson = { name: newName, number: newNumber }
-        phonebook.find(person => isUserInPhonebook(person)) ? alertNameFound() : services.create(newPerson).then(item => updatePhonebookAndClearInput(item))
+        phonebook.find(person => isUserInPhonebook(person)) ? alertNameFound() : addNewPersonToPhonebook(newPerson)
+    }
+
+    const addNewPersonToPhonebook = (newPerson) => {
+        setPreviouseName(newPerson.name);
+        services.create(newPerson).then(item => updatePhonebookAndClearInput(item))
+        setNewContactAdded(true)
+        setTimeout(()=>{
+            setNewContactAdded(false)
+        },3000)
     }
 
     return (
         <div className="phonebook-form">
             <h1>Phonebook</h1>
+            <h2 className={newContactAdded ? "show-addition-msg":"hide-addition-msg"}>{`${previouseName} has been added sucessfully.`}</h2>
             <form>
                 <div>
                     <p>name    : <input value={newName} onChange={handleNewName} onClick={() => clearBox(setNewName)} /></p>

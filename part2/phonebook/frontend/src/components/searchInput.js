@@ -20,7 +20,7 @@ const Search = ({phonebook}) => {
         <div className="search-bar">
             search for <input value={search} onChange={searchHandler} onClick={()=>cleanInput(setSearch)}/>
             <ul>
-                {founds && founds.map(contact => <li key={contact.id}>{contact.name}</li>)}
+                {search !== '' && founds && founds.map(contact => <li key={contact.id}>{contact.name}</li>)}
             </ul>
         </div>
     )

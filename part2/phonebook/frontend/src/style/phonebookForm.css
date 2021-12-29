@@ -1,0 +1,10 @@
+.show-addition-msg{
+    visibility: visible;
+    border: 10px solid green;
+    background-color: greenyellow;
+    font-weight: 200;
+}
+
+.hide-addition-msg{
+    visibility: hidden;
+}
