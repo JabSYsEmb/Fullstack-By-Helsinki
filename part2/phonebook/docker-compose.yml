@@ -13,7 +13,7 @@ services:
       - ./frontend:/root/app/
       - node_modules:/root/app/node_modules
     environment:
-      - VIRTUAL_HOSTS=frontend.colasloth.com
+      - VIRTUAL_HOST=frontend.colasloth.com
     container_name: frontend
 
   backend:
@@ -23,7 +23,7 @@ services:
     volumes:
       - ./backend/data.json:/data/db.json
     environment:
-      - VIRTUAL_HOSTS=backend.colasloth.com
+      - VIRTUAL_HOST=backend.colasloth.com
     container_name: backend
 
   nginx:
@@ -34,7 +34,7 @@ services:
     ports:
       - 80:80
     environment:
-      - VIRTUAL_HOSTS=phonebook.colasloth.com
+      - VIRTUAL_HOST=phonebook.colasloth.com
     depends_on:
       - frontend
       - backend

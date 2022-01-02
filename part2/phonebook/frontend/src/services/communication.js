@@ -30,8 +30,8 @@ const deleteByID = (id) => {
 }
 
 export default {
-    getAll     : getAll,
-    create     : create,
-    update     : update,
-    deleteByID : deleteByID
+    getAll,
+    create,
+    update,
+    deleteByID
 }
