@@ -33,7 +33,7 @@ const PhonebookForm = ({phonebook,setPhonebook}) => {
     }
 
     const isUserInPhonebook = (item) => {
-        return (item.name === newName && item.number === newNumber) | (item.number === newNumber) ? true : false;
+        return (item.name === newName && item.number === newNumber) | (item.number === newNumber);
     }
 
     const handleSubmit = (e) => {
