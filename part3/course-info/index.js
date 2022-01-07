@@ -1,9 +1,8 @@
+const http    = require('http')
 const express = require('express')
 const content = express()
 
-const http = require('http')
-
-const notes = [  
+let notes = [  
 	{    
 		id: 1,    
 		content: "HTML is easy",    
@@ -38,8 +37,29 @@ const notesHandler = (req, res) => {
 	res.json(notes)
 }
 
+const noteByIdHandler = (req, res) => {
+	const id   = Number(req.params.id)
+	const note = notes.find(note => note.id === id)
+	if(!note){
+		res.status(404).end()
+	}
+	else{
+		res.json(note)
+	}
+}
+
 content.get('/', rootHandler)
+
 content.get('/api/notes', notesHandler)
+content.get('/api/notes/:id', noteByIdHandler)
+
+content.delete('/api/notes/:id', (req, res) => {
+	const id = Number(req.params.id)
+	console.log(id)
+	notes = notes.filter(note => note.id !== id)
+	console.log(notes)
+	res.status(204).end()
+})
 
 const APP_PORT = 3001
 app.listen(APP_PORT)
