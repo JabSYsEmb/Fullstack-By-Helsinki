@@ -55,9 +55,7 @@ content.get('/api/notes/:id', noteByIdHandler)
 
 content.delete('/api/notes/:id', (req, res) => {
 	const id = Number(req.params.id)
-	console.log(id)
 	notes = notes.filter(note => note.id !== id)
-	console.log(notes)
 	res.status(204).end()
 })
 
