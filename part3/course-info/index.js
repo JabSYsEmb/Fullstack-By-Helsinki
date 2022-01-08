@@ -2,6 +2,9 @@ const http    = require('http')
 const express = require('express')
 const content = express()
 
+const APP_PORT = 3001
+const CONTENT_PORT = 3002
+
 let notes = [  
 	{    
 		id: 1,    
@@ -48,6 +51,8 @@ const noteByIdHandler = (req, res) => {
 	}
 }
 
+content.use(express.json())
+
 content.get('/', rootHandler)
 
 content.get('/api/notes', notesHandler)
@@ -59,10 +64,14 @@ content.delete('/api/notes/:id', (req, res) => {
 	res.status(204).end()
 })
 
-const APP_PORT = 3001
+content.post('/api/notes', (req, res) => {
+	const note = req.body
+	console.log(note)
+	res.json(note)
+})
+
 app.listen(APP_PORT)
 
-const CONTENT_PORT = 3002
 
 content.listen(CONTENT_PORT, () => {
 	console.log(`content running on port ${CONTENT_PORT}`)
