@@ -37,7 +37,7 @@ const person_deleteByID_handler = (req, res) => {
 	const deleted_person = data.find(person => person.id === id)
 
 	data = data.filter(person => person.id !== id)
-	res.status(204).send(deleted_person)
+	res.status(200).json(deleted_person)
 }
 
 const info_handler = (res, req) => {
@@ -49,12 +49,34 @@ const info_handler = (res, req) => {
 	`)
 }
 
-const person_added_handler = (req, res) => {
-	const payload = req.body
-	console.log(payload)
-	res.send(payload)
-}
+const person_ID_generator = () => 
+	Math.ceil( 
+		Math.random() + 
+		( Math.max(...data.map(person => person.id)) - Math.min(...data.map(person => person.id)) ) + 
+		Math.min(...data.map(person => person.id)) 
+	)
 
+const is_payload_correct = (payload) => (payload.name) && (payload.number)
+
+const person_added_handler = (req, res) => {
+	const body = req.body
+	if(is_payload_correct(body))
+	{
+		const payload = {
+			id: person_ID_generator(),
+			...body
+		}
+		data.push(payload)
+		res.status(202).send(payload)
+	}
+	else
+	{
+		res
+			.status(400)
+			.json(body)
+			.end()
+	}
+}
 
 // PERSONS API
 app.get('/api/persons', person_api_handler)
@@ -62,8 +84,9 @@ app.get('/api/persons/:id', person_getByID_handler)
 app.get('/info', info_handler)
 
 app.delete('/api/persons/:id', person_deleteByID_handler)
+
 app.post('/api/persons', person_added_handler)
 
-app.listen(APP_PORT, ()=> {
+app.listen(APP_PORT, () => {
 	console.log(`App running on http://localhost:${APP_PORT}`)
 })
