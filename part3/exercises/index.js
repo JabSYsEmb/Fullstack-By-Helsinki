@@ -1,3 +1,8 @@
+// To-do
+// 1. fix the id generator function for new added person (person_ID_generator) 
+// 2. 
+//
+
 const express 		= require("express")
 const bodyParser  = require("body-parser")
 
