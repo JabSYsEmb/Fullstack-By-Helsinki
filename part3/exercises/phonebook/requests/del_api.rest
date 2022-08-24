@@ -1,0 +1,10 @@
+DELETE http://localhost:3000/api/person/2
+
+###
+GET http://localhost:3000/api/persons
+
+###
+DELETE http://localhost:3000/api/person/1
+
+###
+DELETE http://localhost:3000/api/person/f
