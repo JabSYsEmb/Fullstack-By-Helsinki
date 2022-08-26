@@ -1,10 +1,20 @@
-DELETE http://localhost:3000/api/person/2
-
 ###
 GET http://localhost:3000/api/persons
 
 ###
-DELETE http://localhost:3000/api/person/1
+GET http://localhost:3000/api/person/1
+
+###
+POST http://localhost:3000/api/persons
+content-type: application/json
+
+{
+    "name": "Ahmed Sharif",
+    "number": "12-33-44444"
+}
+
+### Unknown end point
+DELETE http://localhost:3000/a2n2
 
 ###
 DELETE http://localhost:3000/api/person/f
