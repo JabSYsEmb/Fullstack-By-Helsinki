@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "it's a backend project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'test passed'",
+    "dev": "nodemon exec npm start",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "Cabbar",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
+  }
+}
