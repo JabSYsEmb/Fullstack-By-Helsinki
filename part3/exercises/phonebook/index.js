@@ -1,7 +1,6 @@
-const express = require("express");
+#!/usr/bin/env node
 const util = require("./controllers/util.js");
 const middleware = require("./middlewares");
-const app = express();
 
 /*
  * this snippet should be inserted into ./node_modules/morgan/index.js
@@ -15,16 +14,24 @@ const app = express();
  * ---
  */
 
-app.use(express.json());
-app.use(
-  require("morgan")(
-    ":method :url :status :res[content-length] - :response-time ms :payload"
-  )
-);
 
-app.get("/api/persons", (_a, res) => {
+// app.use(
+//   require("morgan")(
+//     ":method :url :status :res[content-length] - :response-time ms :payload"
+//   )
+// );
+
+const express = require("express");
+const { json } = require("express");
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/api/persons", express.json() ,(_a, res) => {
   res.send(util.getAllPersons());
 });
+
 
 app.get("/info", (_, res) => {
   res.send(util.infoHandler());
@@ -38,6 +45,7 @@ app.get("/api/person/:id", (req, res) => {
 });
 
 app.post("/api/persons", (req, res) => {
+  console.log(req);
   let new_person = util.addNewPerson(req.body);
 
   new_person
