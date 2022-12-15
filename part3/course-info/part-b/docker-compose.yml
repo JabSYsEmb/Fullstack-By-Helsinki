@@ -5,19 +5,19 @@ volumes:
   frontend_vol:
 
 services:
-  #  backend:
-  #    build: ./backend
-  #    volumes:
-  #      - ./backend:/home/app
-  #      - backend_vol:/home/app/node_modules
-  #    environment:
-  #      - PORT=3000
-  #      - ORIGIN=http://localhost:3002
-  #    ports:
-  #      - 3000:3000
-  #    depends_on:
-  #      - frontend
-  #    container_name: backend
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/home/app
+      - backend_vol:/home/app/node_modules
+    environment:
+      - PORT=3000
+      - ORIGIN=http://localhost:3002
+    ports:
+      - 3000:3000
+    depends_on:
+      - frontend
+    container_name: backend
 
   frontend:
     build: ./frontend
@@ -26,8 +26,7 @@ services:
       - frontend_vol:/home/app/node_modules
     environment:
       - REACT_APP_PORT=3000
-      - REACT_APP_BACKEND=https://secure-inlet-94711.herokuapp.com
+      - REACT_APP_BACKEND=http://localhost:3000
     ports:
       - 3002:3000
-    command: 'serve -s build'
     container_name: frontend

@@ -8,4 +8,4 @@ RUN npm install
 
 RUN npm install -g serve
 
-ENTRYPOINT ["npm","run","build"]
+ENTRYPOINT ["npm","start"]
