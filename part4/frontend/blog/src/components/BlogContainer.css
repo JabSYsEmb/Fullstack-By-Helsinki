@@ -1,0 +1,38 @@
+.blog-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	left-padding: 0px;
+	height: 75%;
+	width: 75%;
+}
+
+li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: solid red 2px;
+	border-radius: 24px;
+	height: 75vh;
+	width: 30vw;
+}
+
+li h1{
+	text-decoration: underline;
+}
+
+li img{
+	border: dashed blue 2px;
+	border-radius: 25px;
+}
+
+li p {
+	font-style: italic;
+	font-size: 12px;
+}
+
+li p::first-letter {
+	font-size: 35px;
+}
+
