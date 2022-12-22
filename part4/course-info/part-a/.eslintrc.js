@@ -1,8 +1,9 @@
 module.exports = {
   'env': {
-    'commonjs': true,
+    'commonjs': false,
     'es2021': true,
-    'node': true
+    'node': true,
+    'jest': true
   },
   'extends': 'eslint:recommended',
   'parserOptions': {
