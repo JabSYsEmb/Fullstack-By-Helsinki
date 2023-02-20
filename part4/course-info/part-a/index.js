@@ -1,26 +1,10 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
+const app = require('./app');
+const http = require('http');
 
-const config = require('./utils/config')
-const { requestLogger } = require('./utils/logger.js')
-const { unknownEndpoint, errorHandler } = require('./utils/middleware')
-const notesRouter = require('./controllers/notes')
-const Note = require('./models/note')
+const config = require('./utils/config');
 
-app.use(express.json())
+const server = http.createServer(app);
 
-app.use(requestLogger)
-
-app.use(cors())
-
-app.use(express.static('build'))
-
-app.use('/api/notes/', notesRouter)
-
-app.use(unknownEndpoint)
-app.use(errorHandler)
-
-app.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`)
-})
+server.listen(config.PORT, () => {
+  console.log(`Server running on port ${config.PORT}`);
+});

@@ -1,12 +1,12 @@
-const listHelper = require('../utils/list_helper')
+const listHelper = require('../utils/list_helper');
 
 describe('Dummy function', () => {
   test('dummy returns one', () => {
-    const blogs = []
-    const result = listHelper.dummy(blogs)
-    expect(result).toBe(1)
-  })
-})
+    const blogs = [];
+    const result = listHelper.dummy(blogs);
+    expect(result).toBe(1);
+  });
+});
 
 describe('total likes', () => {
   const blogs = [
@@ -58,7 +58,7 @@ describe('total likes', () => {
       likes: 2,
       __v: 0
     }
-  ]
+  ];
 
   const listWithOneBlog = [
     {
@@ -69,32 +69,39 @@ describe('total likes', () => {
       likes: 5,
       __v: 0
     }
-  ]
+  ];
 
   test('when list has only one blog, equals the likes of that', () => {
-    const result = listHelper.totalLikes(listWithOneBlog)
-    expect(result).toBe(5)
-  })
+    const result = listHelper.totalLikes(listWithOneBlog);
+    expect(result).toBe(5);
+  });
 
   test('when list has more than one blog, equals the likes of that', () => {
-    const result = listHelper.totalLikes(blogs)
-    expect(result).toBe(36)
-  })
+    const result = listHelper.totalLikes(blogs);
+    expect(result).toBe(36);
+  });
 
   test('most loved blog', () => {
-    const result = listHelper.favoriteBlog(blogs)
+    const result = listHelper.favoriteBlog(blogs);
     expect(result).toEqual({
       title: 'Canonical string reduction',
       author: 'Edsger W. Dijkstra',
       likes: 12,
-    })
-  })
+    });
+  });
 
-  test('find author with the most blogs number', () => {
+  test('find author with the most blogs', () => {
     expect(listHelper.mostBlogs(blogs)).toEqual({
       author: 'Robert C. Martin',
       blogs: 3,
-    })
-  })
+    });
+  });
 
-})
+  test('find author with the most likes', () => {
+    expect(listHelper.mostLikes(blogs)).toEqual({
+      author: 'Edsger W. Dijkstra',
+      likes: 17,
+    });
+  });
+
+});

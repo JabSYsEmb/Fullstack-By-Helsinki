@@ -1,6 +1,7 @@
-import Title from "./Title.js";
-import Image from "./Image.js";
-import Text from "./Text.js";
+import React from "react";
+import Title from "./Title.jsx";
+import Image from "./Image.jsx";
+import Text from "./Text.jsx";
 
 import "./BlogContainer.css";
 
